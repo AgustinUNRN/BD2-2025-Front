@@ -98,8 +98,14 @@ console.log(rest); // [3, 4, 5]
 
 console.log("\nEjercicio: \n");
 
-//Escriba una arrow function que reciba un arreglo de string por parametro
-//y transforme el arreglo utilizando map invirtiendo cada uno de sus elementos.
-//Es decir, si el arreglo de entrada es: ['abc123','456cde'], el resultado deberia ser:
-//['321cba','edc654']
+/*Ejercicio: Escriba una arrow function que reciba un arreglo
+de strings por par ́ametro, y transforme el arreglo utilizando
+map invirtiendo cada uno de sus elementos. Es decir, si el
+arreglo de entrada es: [’abc123’,’456cde’], el resultado deber ́ıa ser:
+[’321cba’,’edc654’].*/
+let arr = ['abc123','456cde'];
+    
+const invertStrings = arr => arr.map(str => str.split('').reverse().join(''));
 
+console.log("Arreglo original: ", arr);
+console.log("Arreglo invertido: ", invertStrings(arr));
