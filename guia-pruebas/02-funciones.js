@@ -75,3 +75,23 @@ const arrowf2 = param => {
 //arrow functions con una sentencia no necesita llaves
 //y tampoco es necesario el return
 const arrowf3 = (a, b) => a + b;
+
+
+/*Ejercicio: Cree una funcion que reciba una cadena como parametro
+y devuelva la cantidad de caracteres que tiene. Utilice la funcion
+clasica con el keyword function. Luego implemente lo mismo pero
+usando una arrow function.*/
+    const cadena = "Hola Mundo";
+    console.log("Cadena: "+cadena);
+    console.log("Cantidad de caracteres: "+cadena.length);
+
+
+    function classicFunction(string) {
+        return string.length;
+    }
+    console.log("Cantidad de caracteres funcion clasica: ");
+    console.log(classicFunction(cadena));
+
+    const arrowFunction = (string) => string.length;
+    console.log("Cantidad de caracteres funcion arrow: ");
+    console.log(arrowFunction(cadena));
