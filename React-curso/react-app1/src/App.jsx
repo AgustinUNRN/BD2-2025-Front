@@ -4,6 +4,7 @@ import viteLogo from '/vite.svg'
 import './App.css'
 import Persona from './Persona.jsx'
 import TareaClase3 from './TareaClase3.jsx'
+import './Borde.css'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -53,17 +54,13 @@ function App() {
     ])
   }
 
+
   return (
     <>
     <TareaClase3 />
     <Persona />
 
-    <div style={{
-      border: '2px solid #ccc',
-      borderRadius: '8px',
-      padding: '20px',
-      margin: '20px 0'
-    }}>
+    <div className="estiloBorder">
      <b>Hola Mundo ! mi primer proyecto en React!</b>
 
      <div>

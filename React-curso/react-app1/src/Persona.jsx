@@ -1,12 +1,14 @@
 import React from 'react'
+import './Borde.css'
 
 export default function Persona() {
+
+  const obj = {
+    nombre: "Tony",
+    apellido: "Stark"
+  };
+
   return (
-    <div style={{
-      border: '2px solid #ccc',
-      borderRadius: '8px',
-      padding: '20px',
-      margin: '20px 0'
-    }}>Hola Persona desde una función</div>
+    <div className="estiloBorder">{obj.nombre + " - " + obj.apellido}</div>
   )
 }

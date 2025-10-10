@@ -1,13 +1,9 @@
 import React from 'react'
+import './Borde.css'
 
 export default function TareaClase3() {
   return (
-    <div style={{
-      border: '2px solid #ccc',
-      borderRadius: '8px',
-      padding: '20px',
-      margin: '20px 0'
-    }}>
+    <div className="estiloBorder">
         <h2>Componente Funcional - Tarea Clase 3</h2>
         <h3>Cree un componente de función que muestre en parrafos diferentes su nombre y apellido</h3>
 
@@ -17,8 +13,6 @@ export default function TareaClase3() {
         <p>Color Favorito: Verde</p>
         <p>Profesión: Dios del Engaño</p>
         <p>Hobbie: Crear caos</p>
-
-        
     </div>
   )
 }
