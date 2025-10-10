@@ -24,7 +24,9 @@ export default function Persona() {
 
   return (
     <div className="estiloBorder">
-      {personas.map((elemento) => {
+      <div><h2>Tarea clase 4 y 5</h2></div>
+      {
+      personas.map((elemento) => {
           return (
             //key es importante para que React pueda identificar cada elemento de la lista
             //y optimizar el renderizado.
