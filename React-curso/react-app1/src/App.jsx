@@ -7,6 +7,10 @@ import TareaClase3 from './TareaClase3.jsx'
 import './Borde.css'
 import Curso from './Curso.jsx'
 import Popup from './Popup.jsx'
+import Counter from './Counter.jsx'
+import Usuarios from './Usuarios.jsx'
+import PruebasEstado from './PruebasEstado.jsx'
+
 
 function App() {
   
@@ -80,6 +84,9 @@ function App() {
 
   return (
     <>
+    <PruebasEstado />
+    <Usuarios />
+    <Counter />
     <Popup />
     <Persona personas={personas} titulo="Lista de Personas clase 6" handler={handlerClick}/>
     <TareaClase3 />
