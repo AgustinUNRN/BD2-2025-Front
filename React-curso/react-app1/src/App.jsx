@@ -5,8 +5,25 @@ import './App.css'
 import Persona from './Persona.jsx'
 import TareaClase3 from './TareaClase3.jsx'
 import './Borde.css'
+import Curso from './Curso.jsx'
 
 function App() {
+  
+  const estudiantes = [
+    { id: 1, nombre: "Agustin", apellido: "Gonzalez" },
+    { id: 2, nombre: "Juan", apellido: "Perez" },
+    { id: 3, nombre: "Maria", apellido: "Gomez" },
+    { id: 4, nombre: "Ana", apellido: "Lopez" },
+  ];
+
+  //corresponde a la tarea de la clase 6
+   const personas = [
+    { id: 1, nombre: "Steve", apellido: "Rogers", telefono: "123-456-7890", direccion: "Avengers Tower" },
+    { id: 2, nombre: "Natasha", apellido: "Romanoff", telefono: "987-654-3210", direccion: "Avengers Compound" },
+    { id: 3, nombre: "Bruce", apellido: "Banner", telefono: "555-555-5555", direccion: "Stark Tower" },
+    { id: 4, nombre: "Thor", apellido: "Odinson", telefono: "111-222-3333", direccion: "Asgard" },
+  ];
+
   const [count, setCount] = useState(0)
   const [step, setStep] = useState(1)
   const [history, setHistory] = useState([])
@@ -57,8 +74,9 @@ function App() {
 
   return (
     <>
+    <Persona personas={personas} titulo="Lista de Personas clase 6"/>
     <TareaClase3 />
-    <Persona />
+    <Curso nombreCurso="React Básico" estudiantes={estudiantes} />
 
     <div className="estiloBorder">
      <b>Hola Mundo ! mi primer proyecto en React!</b>
