@@ -6,6 +6,7 @@ import Persona from './Persona.jsx'
 import TareaClase3 from './TareaClase3.jsx'
 import './Borde.css'
 import Curso from './Curso.jsx'
+import Popup from './Popup.jsx'
 
 function App() {
   
@@ -71,10 +72,16 @@ function App() {
     ])
   }
 
+  function handlerClick(e) {
+    e.preventDefault(); //Evita que el link recargue la página
+    console.log("Desde app.jsx");
+  }
+
 
   return (
     <>
-    <Persona personas={personas} titulo="Lista de Personas clase 6"/>
+    <Popup />
+    <Persona personas={personas} titulo="Lista de Personas clase 6" handler={handlerClick}/>
     <TareaClase3 />
     <Curso nombreCurso="React Básico" estudiantes={estudiantes} />
 
