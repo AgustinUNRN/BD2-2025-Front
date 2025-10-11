@@ -43,6 +43,7 @@ function handlerOnClickLimpiarTablas() {
         <hr />
         <table>
           <thead>
+            <p>Tabla de Usuarios</p>
             <tr>
               <th>ID</th>
               <th>Nombre</th>
@@ -63,7 +64,8 @@ function handlerOnClickLimpiarTablas() {
         </table>
         <table>
             <thead>
-                <tr>
+                <p>Tabla de Posts</p>
+                <tr> 
                     <th>ID</th>
                     <th>Título</th>
                     <th>Body</th>
