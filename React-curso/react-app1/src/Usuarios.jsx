@@ -1,9 +1,18 @@
-import {useState} from 'react'
+import {useEffect, useState} from 'react'
 import './Borde.css'
 
 export default function Usuarios() {
 
   const [users, setUsers] = useState([]);
+
+  //acá no puedo tener efectos de lado
+
+  useEffect(() => {
+    console.log('se llamó al callback de useEffect');
+    fetch('https://jsonplaceholder.typicode.com/users')
+          .then((response) => response.json())
+          .then((json) => setUsers(json));
+  }, []);
 
   function handlerClickListarUsuarios() {
     fetch('https://jsonplaceholder.typicode.com/users')

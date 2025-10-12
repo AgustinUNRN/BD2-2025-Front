@@ -41,9 +41,9 @@ function handlerOnClickLimpiarTablas() {
         <button onClick={handlerOnClickLimpiarTablas}>Limpiar tablas</button>
 
         <hr />
+        <p>Tabla de Usuarios</p>
         <table>
           <thead>
-            <p>Tabla de Usuarios</p>
             <tr>
               <th>ID</th>
               <th>Nombre</th>
@@ -62,9 +62,9 @@ function handlerOnClickLimpiarTablas() {
             ))}
           </tbody>
         </table>
+        <p>Tabla de Posts</p>
         <table>
             <thead>
-                <p>Tabla de Posts</p>
                 <tr> 
                     <th>ID</th>
                     <th>Título</th>
