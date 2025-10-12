@@ -1,4 +1,4 @@
-import {useState} from 'react'
+import {useEffect,useState} from 'react'
 import './Borde.css'
 
 /*Escriba un componente llamado PruebasEstado que tenga 3 botones. Uno para listar los posts
@@ -13,6 +13,15 @@ const [users, setUsers] = useState([]);
 
 const [posts, setPosts] = useState([]);
 
+useEffect(() => {
+  console.log('se llamó al callback de useEffect + clase 9');
+  fetch('https://jsonplaceholder.typicode.com/users')
+        .then((response) => response.json())
+        .then((json) => setUsers(json));
+  fetch('https://jsonplaceholder.typicode.com/posts')
+    .then((response) => response.json())
+    .then((json) => setPosts(json));
+}, []);
 
 function handlerOnClickListarPosts() {
   fetch('https://jsonplaceholder.typicode.com/posts')
