@@ -5,19 +5,23 @@ export default function Usuarios() {
 
   const [users, setUsers] = useState([]);
 
+  const API_KEY = 'reqres-free-v1'; 
+  const API_AUTORIZATION = 'x-api-key'
+  const API_URL = 'https://reqres.in/api/users';
+
   //acá no puedo tener efectos de lado
 
   useEffect(() => {
     console.log('se llamó al callback de useEffect');
-    fetch('https://jsonplaceholder.typicode.com/users')
+    fetch(API_URL,{headers: {[API_AUTORIZATION]: API_KEY}})
           .then((response) => response.json())
-          .then((json) => setUsers(json));
+          .then((json) => setUsers(json.data));
   }, []);
 
   function handlerClickListarUsuarios() {
-    fetch('https://jsonplaceholder.typicode.com/users')
+    fetch(API_URL,{headers: {[API_AUTORIZATION]: API_KEY}})
       .then((response) => response.json())
-      .then((json) => setUsers(json));
+      .then((json) => setUsers(json.data));
   }
 
   function handlerClikBorrarUsuarios() {
@@ -47,9 +51,10 @@ export default function Usuarios() {
             {users.map((user) => (
               <tr key={user.id}>
                 <td>{user.id}</td>
-                <td>{user.name}</td>
-                <td>{user.username}</td>
+                <td>{user.first_name}</td>
+                <td>{user.last_name}</td>
                 <td>{user.email}</td>
+                <td><img src={user.avatar} alt={user.first_name} /></td>
               </tr>
             ))}
           </tbody>
