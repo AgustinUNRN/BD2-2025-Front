@@ -11,80 +11,95 @@ export default function PruebasEstado() {
 
 const [users, setUsers] = useState([]);
 const [posts, setPosts] = useState([]);
-const [totalPagesUsers, setTotalPagesUsers] = useState(1);
-const [totalPagesPosts, setTotalPagesPosts] = useState(1);
-const [pageUser, setPageUser] = useState(1);
-const [pagePost, setPagePost] = useState(1);
+const [usersLimit, setUsersLimit] = useState(0); // ✅ Usar límite en lugar de página
+const [postsLimit, setPostsLimit] = useState(0); // ✅ Usar límite en lugar de página
+const [maxUsers, setMaxUsers] = useState(0);
+const [maxPosts, setMaxPosts] = useState(0);
+
 
 useEffect(() => {
   console.log('se llamó al callback de useEffect + clase 9');
-  fetch('https://jsonplaceholder.typicode.com/users?_start=0&_limit=10')
+  fetch('https://jsonplaceholder.typicode.com/users')
         .then((response) => response.json())
-        .then((json) =>{ setUsers(json); const totalPageU=json.length; setTotalPagesUsers(totalPageU), setPageUser(totalPageU),setTotalPagesUsers(totalPageU);});
-  fetch('https://jsonplaceholder.typicode.com/posts?_start=0&_limit=10')
+        .then((json) => {
+          setUsers(Array.isArray(json) ? json : []);
+          setMaxUsers(json.length); // ✅ Obtener máximo en el mismo fetch
+          setUsersLimit(json.length);
+        });
+  fetch('https://jsonplaceholder.typicode.com/posts')
     .then((response) => response.json())
-    .then((json) =>{ setPosts(json); const totalPageP=json.length; setTotalPagesPosts(totalPageP), setPagePost(totalPageP),setTotalPagesPosts(totalPageP);});
+    .then((json) => {
+      setPosts(Array.isArray(json) ? json : []);
+      setMaxPosts(json.length); // ✅ Obtener máximo en el mismo fetch
+      setPostsLimit(json.length);
+    });
 }, []);
 
 function handlerOnClickListarPosts() {
    fetch('https://jsonplaceholder.typicode.com/posts')
     .then((response) => response.json())
-    .then((json) =>{ setPosts(json); const totalPageP=json.length; setTotalPagesPosts(totalPageP), setPagePost(totalPageP),setTotalPagesPosts(totalPageP);});
+    .then((json) =>setPosts(Array.isArray(json) ? json : []))
+    .catch((error) => console.error('Error:', error));
 
-    console.log("pagePost= "+pagePost);
 }
 
 function handlerOnClickListarUsuarios() {
    fetch('https://jsonplaceholder.typicode.com/users')
        .then((response) => response.json())
-       .then((json) =>{ setUsers(json); const totalPageU=json.length; setTotalPagesUsers(totalPageU), setPageUser(totalPageU),setTotalPagesUsers(totalPageU);});
-    console.log("pageUser= "+pageUser);
+       .then((json) =>setUsers(Array.isArray(json) ? json : []))
+       .catch((error) => console.error('Error:', error));
 }
 
 function handlerOnClickLimpiarTablas() {
-  setPageUser(0);
-  setPagePost(0);
   setUsers([]);
   setPosts([]);
-  console.log("pageUser= "+pageUser);
-  console.log("pagePost= "+pagePost);
+  setUsersLimit(0); // ✅ Resetear límites
+  setPostsLimit(0); // ✅ Resetear límites
+  console.log("Limpiar tablas");
+  console.log("Users:", usersLimit);
+  console.log("Posts:", postsLimit);
 }
 
 function handlerClickAgregarUsers() {
   // Lógica para agregar un nuevo post o usuario
-  fetch('https://jsonplaceholder.typicode.com/users?_limit='+pageUser)
+  const newLimit = usersLimit + 1;
+  console.log("Agregando usuarios. Nuevo límite:", newLimit);
+  fetch(`https://jsonplaceholder.typicode.com/users?_limit=${newLimit}`)
     .then((response) => response.json())
     .then((json) => setUsers(json));
-  setPageUser((pageUser) => pageUser + 1);
-  console.log("pageUser= "+pageUser);
+  setUsersLimit(newLimit);
 }
 
 function handlerClickSacarUsers() {
   // Lógica para eliminar un post o usuario
-  fetch('https://jsonplaceholder.typicode.com/users?_limit='+(  pageUser - 1))
+  const newLimit = usersLimit - 1;
+    console.log("Sacando usuarios. Nuevo límite:", newLimit);
+  fetch(`https://jsonplaceholder.typicode.com/users?_limit=${newLimit}`)
     .then((response) => response.json())
     .then((json) => setUsers(json));
-  setPageUser((pageUser) => pageUser - 1);
-  console.log("PageUser= "+pageUser);
+  setUsersLimit(newLimit);
 }
 
 function handlerClickAgregarPosts() {
   // Lógica para agregar un nuevo post o usuario
-  fetch('https://jsonplaceholder.typicode.com/posts?_limit='+pagePost)
+  const newLimit = postsLimit + 1;
+  console.log("Agregando posts. Nuevo límite:", newLimit);
+  fetch(`https://jsonplaceholder.typicode.com/posts?_limit=${newLimit}`)
     .then((response) => response.json())
     .then((json) => setPosts(json));
-  setPagePost((pagePost) => pagePost + 1);
-  console.log("PagePost= "+pagePost);
+  setPostsLimit(newLimit);
 }
 
 function handlerClickSacarPosts() {
   // Lógica para eliminar un post o usuario
-  fetch('https://jsonplaceholder.typicode.com/posts?_limit='+(  pagePost - 1))
+  const newLimit = postsLimit - 1;
+  console.log("Sacando posts. Nuevo límite:", newLimit);
+  fetch(`https://jsonplaceholder.typicode.com/posts?_limit=${newLimit}`)
     .then((response) => response.json())
     .then((json) => setPosts(json));
-  setPagePost((pagePost) => pagePost - 1);
-  console.log("PagePost= "+pagePost);
+  setPostsLimit(newLimit);
 }
+
 
   return (
     <div className='estiloBorder'>
@@ -96,10 +111,10 @@ function handlerClickSacarPosts() {
         <button onClick={handlerOnClickLimpiarTablas}>Limpiar tablas</button>
 
         <h4>Tarea Clase 10</h4>
-        <button disabled={pageUser === totalPagesUsers} onClick={handlerClickAgregarUsers}>Agregar Usuarios a la lista</button>
-        <button disabled={pageUser === 0} onClick={handlerClickSacarUsers}>Eliminar Usuarios de la lista</button>
-        <button disabled={pagePost === totalPagesPosts} onClick={handlerClickAgregarPosts}>Agregar Posts a la lista</button>
-        <button disabled={pagePost === 0} onClick={handlerClickSacarPosts}>Eliminar de la lista de posts</button>
+        <button disabled={usersLimit >= maxUsers} onClick={handlerClickAgregarUsers}>Agregar Usuarios a la lista</button>
+        <button disabled={usersLimit <= 0} onClick={handlerClickSacarUsers}>Eliminar Usuarios de la lista</button>
+        <button disabled={postsLimit >= maxPosts} onClick={handlerClickAgregarPosts}>Agregar Posts a la lista</button>
+        <button disabled={postsLimit <= 0} onClick={handlerClickSacarPosts}>Eliminar de la lista de posts</button>
 
         <hr />
         <p>Tabla de Usuarios</p>
