@@ -10,6 +10,7 @@ import Popup from './Popup.jsx'
 import Counter from './Counter.jsx'
 import Usuarios from './Usuarios.jsx'
 import PruebasEstado from './PruebasEstado.jsx'
+import Usuarios2ReactQuery from './Usuarios2ReactQuery.jsx'
 
 
 function App() {
@@ -84,6 +85,7 @@ function App() {
 
   return (
     <>
+    <Usuarios2ReactQuery />
     <PruebasEstado />
     <Usuarios />
     <Counter />
