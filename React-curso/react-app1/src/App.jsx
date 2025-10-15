@@ -11,6 +11,7 @@ import Counter from './Counter.jsx'
 import Usuarios from './Usuarios.jsx'
 import PruebasEstado from './PruebasEstado.jsx'
 import Usuarios2ReactQuery from './Usuarios2ReactQuery.jsx'
+import FormClase12 from './FormClase12.jsx'
 
 
 function App() {
@@ -85,6 +86,7 @@ function App() {
 
   return (
     <>
+    <FormClase12 />
     <Usuarios2ReactQuery />
     <PruebasEstado />
     <Usuarios />
