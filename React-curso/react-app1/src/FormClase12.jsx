@@ -38,8 +38,12 @@ export default function FormClase12() {
             },
             body: JSON.stringify(formData),
         })
-        .then(response => response.json())
-        .then(json => setResultado("Creado usuario con ID: " + json.id));
+        .then((response) => {
+          if (!response.ok) throw new Error("Algo salió mal");
+          else return response.json();
+        })
+        .then(json => setResultado("Creado usuario con ID: " + json.id))
+        .catch((error) => setResultado("Error: " + error.message));
         
     }
 
