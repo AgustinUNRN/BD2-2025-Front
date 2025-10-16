@@ -12,6 +12,7 @@ import Usuarios from './Usuarios.jsx'
 import PruebasEstado from './PruebasEstado.jsx'
 import Usuarios2ReactQuery from './Usuarios2ReactQuery.jsx'
 import FormClase12 from './FormClase12.jsx'
+import FormularioTareaClase12 from './FormularioTareaClase12.jsx'
 
 
 function App() {
@@ -86,6 +87,7 @@ function App() {
 
   return (
     <>
+    <FormularioTareaClase12 />
     <FormClase12 />
     <Usuarios2ReactQuery />
     <PruebasEstado />
