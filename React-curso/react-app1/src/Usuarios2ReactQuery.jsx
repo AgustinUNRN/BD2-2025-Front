@@ -1,22 +1,20 @@
 // import {useEffect, useState} from 'react'
-import React from 'react'
-import './Borde.css'
-import { useQuery, useQueryClient } from '@tanstack/react-query';
+import React from "react";
+import "./Borde.css";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 
 export default function Usuarios2ReactQuery() {
-
-//   const [page, setPage] = useState(1);
-//   const [totalPages, setTotalPages] = useState(1);
+  //   const [page, setPage] = useState(1);
+  //   const [totalPages, setTotalPages] = useState(1);
 
   const [page, setPage] = React.useState(1); // O importar React
   const [totalPages, setTotalPages] = React.useState(1);
   const [enableList, setEnableList] = React.useState(false);
 
   const queryClient = useQueryClient(); // ✅ Obtener la instancia
-    
 
-  const API_KEY = 'reqres-free-v1'; 
-  const API_AUTORIZATION = 'x-api-key'
+  const API_KEY = "reqres-free-v1";
+  const API_AUTORIZATION = "x-api-key";
 
   //acá no puedo tener efectos de lado
 
@@ -35,35 +33,39 @@ export default function Usuarios2ReactQuery() {
   }, [page]); //importante page para poder paginar
 
   */
- function conDelay(delay) {
+  function conDelay(delay) {
     return new Promise((resolve) => setTimeout(resolve, delay));
   }
 
   const query = useQuery({
-    queryKey: ['usuarios', page],
-    queryFn: () => 
-        conDelay(1000).then(() =>
-        fetch('https://reqres.in/api/users?page='+page,{headers: {[API_AUTORIZATION]: API_KEY}})
+    queryKey: ["usuarios", page],
+    queryFn: () =>
+      conDelay(1000).then(() =>
+        fetch("https://reqres.in/api/users?page=" + page, {
+          headers: { [API_AUTORIZATION]: API_KEY },
+        })
           .then((response) => response.json())
           .then((json) => {
             setTotalPages(json.total_pages);
             return json.data;
           })
-        ),
-        enabled: enableList, // ✅ Esto evita la ejecución automática
+      ),
+    enabled: enableList, // ✅ Esto evita la ejecución automática
     //staleTime: 10000, // 10 segundos
-  })
+  });
 
-  function handlerClickListarUsuarios() {//Tarea clase 11
+  function handlerClickListarUsuarios() {
+    //Tarea clase 11
     query.refetch();
     setEnableList(true);
   }
 
-  function handlerClikBorrarUsuarios() { //Tarea clase 11
+  function handlerClikBorrarUsuarios() {
+    //Tarea clase 11
     //borrar los datos en React Query
     setEnableList(false); // ✅ Primero deshabilitar
     //Eliminar queries específicas del cache
-    queryClient.removeQueries(['usuarios']); // ✅ Usar queryClient en lugar de query.remove
+    queryClient.removeQueries(["usuarios"]); // ✅ Usar queryClient en lugar de query.remove
     //limpiar todo el cache
     queryClient.clear();
     setPage(1);
@@ -77,7 +79,6 @@ export default function Usuarios2ReactQuery() {
   function handlerClickSiguiente() {
     setPage((page) => page + 1);
   }
-
 
   /* Algunas funcionalidades adicionales de React Query:
 
@@ -110,25 +111,31 @@ export default function Usuarios2ReactQuery() {
    */
 
   return (
-    <div className='estiloBorder'>
+    <div className="estiloBorder">
       <>
         <h2>Componente Listar Usuarios con ReactQuery- Clase 11</h2>
-        <h4>consumiendo de la página https://jsonplaceholder.typicode.com/users</h4>
+        <h4>
+          consumiendo de la página https://jsonplaceholder.typicode.com/users
+        </h4>
 
         <button onClick={handlerClickListarUsuarios}>Listar Usuarios</button>
         <button onClick={handlerClikBorrarUsuarios}>Borrar</button>
 
-        <button disabled={page === 1} onClick={handlerClickAnterior}>Anterior</button>
-        <button disabled={page === totalPages} onClick={handlerClickSiguiente}>Siguiente</button>
+        <button disabled={page === 1} onClick={handlerClickAnterior}>
+          Anterior
+        </button>
+        <button disabled={page === totalPages} onClick={handlerClickSiguiente}>
+          Siguiente
+        </button>
         <hr />
         <table>
           <thead>
             <tr>
-                <th>ID</th>
-                <th>Email</th>
-                <th>Nombre</th>
-                <th>Apellido</th>
-                <th>Avatar</th>
+              <th>ID</th>
+              <th>Email</th>
+              <th>Nombre</th>
+              <th>Apellido</th>
+              <th>Avatar</th>
             </tr>
           </thead>
           <tbody>
@@ -138,23 +145,27 @@ export default function Usuarios2ReactQuery() {
               </tr>
             )}
             {query.data?.map((user) => (
-               <tr key={user.id}>
-                  <td>{user.id}</td>
-                  <td>{user.email}</td>
-                  <td>{user.first_name}</td>
-                  <td>{user.last_name}</td>
-                  <td>
-                    <img 
-                      src={user.avatar} 
-                      alt={`${user.first_name} ${user.last_name}`}
-                      style={{width: '50px', height: '50px', borderRadius: '50%'}}
-                    />
-                  </td>
-                </tr>
+              <tr key={user.id}>
+                <td>{user.id}</td>
+                <td>{user.email}</td>
+                <td>{user.first_name}</td>
+                <td>{user.last_name}</td>
+                <td>
+                  <img
+                    src={user.avatar}
+                    alt={`${user.first_name} ${user.last_name}`}
+                    style={{
+                      width: "50px",
+                      height: "50px",
+                      borderRadius: "50%",
+                    }}
+                  />
+                </td>
+              </tr>
             ))}
           </tbody>
         </table>
       </>
     </div>
-  )
+  );
 }
